@@ -121,7 +121,7 @@ def print_pattern(m, n):
             print("*"+" "*(n-2)+"*")
 print_pattern(4, 5)
 
-# Student Mark Management System (Lab 1b)
+# (Lab 1b)
 
 students = []
 courses = []
@@ -148,7 +148,7 @@ def list_courses():
     if not courses:
         print("No courses.")
         return
-    print("\n--- Courses ---")
+    print("\nCourses")
     for c in courses:
         print(f"ID: {c['id']} | Name: {c['name']}")
 
@@ -183,14 +183,14 @@ def show_student_marks():
     if c_id not in marks:
         print("No marks for this course.")
         return
-    print(f"\n--- Marks for {c_id} ---")
+    print(f"\nMarks for {c_id}")
     for s in students:
         if s['id'] in marks[c_id]:
             print(f"ID: {s['id']} | Name: {s['name']} | Mark: {marks[c_id][s['id']]}")
 
 def main():
     while True:
-        print("\n--- MENU ---")
+        print("\nMENU")
         print("1. Input Students\n2. Input Courses\n3. Input Marks")
         print("4. List Students\n5. List Courses\n6. Show Marks\n0. Exit")
         choice = input("Choice: ").strip()
@@ -204,5 +204,5 @@ def main():
         elif choice == '0': break
         else: print("Invalid choice.")
 
-if __name__ == "__main__":
+if name == "main":
     main()
