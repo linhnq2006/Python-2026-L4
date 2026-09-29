@@ -121,4 +121,88 @@ def print_pattern(m, n):
             print("*"+" "*(n-2)+"*")
 print_pattern(4, 5)
 
+# Student Mark Management System (Lab 1b)
 
+students = []
+courses = []
+marks = {}
+
+def input_student_info():
+    num = int(input("Enter number of students: "))
+    for i in range(num):
+        print(f"\nStudent {i+1}:")
+        s_id = input("ID: ").strip()
+        name = input("Name: ").strip()
+        dob = input("DoB (DD/MM/YYYY): ").strip()
+        students.append({'id': s_id, 'name': name, 'dob': dob})
+
+def input_course_info():
+    num = int(input("Enter number of courses: "))
+    for i in range(num):
+        print(f"\nCourse {i+1}:")
+        c_id = input("ID: ").strip()
+        name = input("Name: ").strip()
+        courses.append({'id': c_id, 'name': name})
+
+def list_courses():
+    if not courses:
+        print("No courses.")
+        return
+    print("\n--- Courses ---")
+    for c in courses:
+        print(f"ID: {c['id']} | Name: {c['name']}")
+
+def list_students():
+    if not students:
+        print("No students.")
+        return
+    print("\n--- Students ---")
+    for s in students:
+        print(f"ID: {s['id']} | Name: {s['name']} | DoB: {s['dob']}")
+
+def input_marks_for_course():
+    if not courses or not students:
+        print("Need both courses and students first.")
+        return
+    list_courses()
+    c_id = input("\nSelect Course ID: ").strip()
+    if not any(c['id'] == c_id for c in courses):
+        print("Invalid Course ID.")
+        return
+    if c_id not in marks:
+        marks[c_id] = {}
+    for s in students:
+        marks[c_id][s['id']] = float(input(f"Mark for {s['name']} ({s['id']}): "))
+
+def show_student_marks():
+    if not marks:
+        print("No marks available.")
+        return
+    list_courses()
+    c_id = input("\nSelect Course ID: ").strip()
+    if c_id not in marks:
+        print("No marks for this course.")
+        return
+    print(f"\n--- Marks for {c_id} ---")
+    for s in students:
+        if s['id'] in marks[c_id]:
+            print(f"ID: {s['id']} | Name: {s['name']} | Mark: {marks[c_id][s['id']]}")
+
+def main():
+    while True:
+        print("\n--- MENU ---")
+        print("1. Input Students\n2. Input Courses\n3. Input Marks")
+        print("4. List Students\n5. List Courses\n6. Show Marks\n0. Exit")
+        choice = input("Choice: ").strip()
+        
+        if choice == '1': input_student_info()
+        elif choice == '2': input_course_info()
+        elif choice == '3': input_marks_for_course()
+        elif choice == '4': list_students()
+        elif choice == '5': list_courses()
+        elif choice == '6': show_student_marks()
+        elif choice == '0': break
+        else: print("Invalid choice.")
+
+if __name__ == "__main__":
+    main()
